@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC94B521-83F2-49FF-AD14-4B978CD271B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D8F2C080-3D9D-4D9F-BF1D-B6F6FCCC6877}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Website", "src\GalaxyHotel.Website\GalaxyHotel.Website.csproj", "{DA0F1A87-71D4-4047-A994-15E934ADB858}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.UITests", "tests\GalaxyHotel.UITests\GalaxyHotel.UITests.csproj", "{B623DDD1-C43E-46AD-8094-D26851D3E35D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db", "db", "{23FFBAD7-12B9-442D-A59A-5FD851B3EDF4}"
+	ProjectSection(SolutionItems) = preProject
+		db\SeedGalaxyHotelDbScript.sql = db\SeedGalaxyHotelDbScript.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA0F1A87-71D4-4047-A994-15E934ADB858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0F1A87-71D4-4047-A994-15E934ADB858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0F1A87-71D4-4047-A994-15E934ADB858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0F1A87-71D4-4047-A994-15E934ADB858}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B623DDD1-C43E-46AD-8094-D26851D3E35D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B623DDD1-C43E-46AD-8094-D26851D3E35D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B623DDD1-C43E-46AD-8094-D26851D3E35D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B623DDD1-C43E-46AD-8094-D26851D3E35D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA0F1A87-71D4-4047-A994-15E934ADB858} = {EC94B521-83F2-49FF-AD14-4B978CD271B3}
+		{B623DDD1-C43E-46AD-8094-D26851D3E35D} = {D8F2C080-3D9D-4D9F-BF1D-B6F6FCCC6877}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F2CA0D0-68C8-42E2-BE75-EB4DFD8A3E81}
+	EndGlobalSection
+EndGlobal

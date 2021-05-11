@@ -1,0 +1,135 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+stages:
+- stage: build
+  displayName: Build
+  jobs:
+  - job: Build
+    steps:
+    - template: build-website.yml
+      parameters:
+        publishArgs: '--output $(Build.ArtifactStagingDirectory)'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish UI Tests artifacts
+      inputs:
+        targetPath: '$(Build.Repository.LocalPath)/tests/GalaxyHotel.UITests'
+        artifact: 'UITests'
+        publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish db artifacts
+      inputs:
+        targetPath: '$(Build.Repository.LocalPath)/db'
+        artifact: 'db'
+        publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      displayName: Publish web artifacts
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)'
+        artifact: 'web'
+        publishLocation: 'pipeline'
+
+- stage: deployDev
+  displayName: Deploy to Dev
+  jobs:
+  - deployment: deployDev
+    displayName: Deploy To Dev
+    environment: 'GalaxyHotel-Dev'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Microsoft Azure Sponsorship'
+              appType: 'webApp'
+              WebAppName: 'galaxyhotel-dev'
+              packageForLinux: '$(Pipeline.Workspace)/web/**/*.zip'
+
+- stage: deployQA
+  displayName: Deploy to QA
+  jobs:
+  - deployment: deployQAWebsite
+    displayName: Deploy Website to QA
+    environment: 'GalaxyHotel-QA'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: SqlAzureDacpacDeployment@1
+            displayName: Prepare the database
+            inputs:
+              azureSubscription: 'Microsoft Azure Sponsorship'
+              AuthenticationType: 'server'
+              ServerName: 'succintly.database.windows.net'
+              DatabaseName: 'galaxyhotel-qa'
+              SqlUsername: '$(sqlAdmin)'
+              SqlPassword: '$(sqlPassword)'
+              deployType: 'SqlTask'
+              SqlFile: '$(Pipeline.Workspace)/db/SeedGalaxyHotelDbScript.sql'
+              IpDetectionMethod: 'AutoDetect'
+          - task: AzureRmWebAppDeployment@4
+            displayName: Deploy website
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Microsoft Azure Sponsorship'
+              appType: 'webApp'
+              WebAppName: 'galaxyhotel-qa'
+              packageForLinux: '$(Pipeline.Workspace)/web/**/*.zip'
+  - deployment: runQATests
+    displayName: Run QA Tests
+    dependsOn: deployQAWebsite
+    environment:
+      name: 'GalaxyHotel-QA'
+      resourceType: VirtualMachine
+      tags: qa
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: none
+          - task: DownloadPipelineArtifact@2
+            displayName: Download UITests artifact
+            inputs:
+              buildType: 'current'
+              artifactName: 'UITests'
+              targetPath: '$(Pipeline.Workspace)/UITests'
+          - task: PowerShell@2
+            displayName: Override TestRunParameters
+            inputs:
+              targetType: 'inline'
+              script: |
+                [xml]$doc = Get-Content $(Pipeline.Workspace)/UITests/GalaxyHotelTests.runsettings
+                $doc.RunSettings.TestRunParameters.ChildNodes.Item(0).value = '$(qaBaseUrl)'
+                $doc.Save("$(Pipeline.Workspace)/UITests/GalaxyHotelTests.runsettings")
+          - task: DotNetCoreCLI@2
+            displayName: Execute UI Tests with Selenium
+            inputs:
+              command: 'test'
+              projects: '$(Pipeline.Workspace)/UITests/**/*.csproj'
+              arguments: '--settings $(Pipeline.Workspace)/UITests/GalaxyHotelTests.runsettings'
+
+- stage: deployProd
+  displayName: Deploy to Production
+  jobs:
+  - deployment: deployProd
+    displayName: Deploy To Production
+    environment: 'GalaxyHotel-Prod'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'Microsoft Azure Sponsorship'
+              appType: 'webApp'
+              WebAppName: 'galaxyhotel'
+              packageForLinux: '$(Pipeline.Workspace)/web/**/*.zip'

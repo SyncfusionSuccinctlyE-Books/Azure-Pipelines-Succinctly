@@ -1,0 +1,42 @@
+parameters:
+- name: librariesFeed
+  displayName: 'Restore from Libraries NuGet feed'
+  type: boolean
+  default: true
+- name: enablePublish
+  displayName: 'Enable publish'
+  type: boolean
+  default: true
+- name: publishArgs
+  displayName: 'Publish Arguments'
+  type: string
+  default: ''
+
+steps:
+- ${{ if eq(parameters.librariesFeed, true) }}:
+  - task: DotNetCoreCLI@2
+    displayName: Restore packages
+    inputs:
+      command: 'restore'
+      feedsToUse: 'select'
+      vstsFeed: '834230a0-50c2-4971-954a-75eb9e3d47dd/dcb14a3c-e6ab-48df-ac52-3ae79a5055f7'
+
+- task: DotNetCoreCLI@2
+  displayName: Build the website
+  inputs:
+      command: 'build'
+      projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: Run tests
+  inputs:
+      command: 'test'
+      projects: 'tests/**/*.csproj;!tests/**/*UITests*.csproj'
+
+- ${{ if eq(parameters.enablePublish, true) }}:
+  - task: DotNetCoreCLI@2
+    displayName: Publish the website
+    inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: ${{ parameters.publishArgs }}
