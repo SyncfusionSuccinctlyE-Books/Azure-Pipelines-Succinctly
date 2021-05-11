@@ -1,0 +1,29 @@
+﻿@model RoomViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to the Galaxy Hotel HelpDesk</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Room Name</th>
+                <th>Room Floor</th>
+                <th>Room Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model.Rooms)
+            {
+                <tr>
+                    <td> @room.Name </td>
+                    <td> @room.Floor </td>
+                    <td> @room.PricePerNight </td>
+                    <td> @Html.ActionLink("Book", "Reserve") </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

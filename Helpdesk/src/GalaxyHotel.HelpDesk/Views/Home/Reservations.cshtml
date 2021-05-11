@@ -1,0 +1,33 @@
+﻿@model ReservationViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Reservations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var reservation in Model.Reservations)
+            {
+                <tr>
+                    <td> @reservation.CheckIn.ToString("d") </td>
+                    <td> @reservation.CheckOut.ToString("d") </td>
+                    <td> @reservation.GuestName </td>
+                    <td> @reservation.RoomName </td>
+                    <td> @reservation.TotalPrice </td>
+                    <td> @Html.ActionLink("Cancel", "Cancel") </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
