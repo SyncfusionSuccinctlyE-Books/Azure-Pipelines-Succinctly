@@ -1,0 +1,7 @@
+mode: ContinuousDelivery
+branches:
+  release:
+    tag: rc
+ignore:
+  sha: []
+merge-message-formats: {}

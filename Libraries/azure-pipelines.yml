@@ -1,0 +1,44 @@
+trigger:
+- develop
+- master
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: gitversion/setup@0
+  displayName: Install GitVersion
+  inputs:
+    versionSpec: '5.x'
+
+- task: gitversion/execute@0
+  displayName: Generate a new version number
+  inputs:
+    useConfigFile: true
+    configFilePath: 'GitVersion.yml'
+
+- task: DotNetCoreCLI@2
+  displayName: Build libraries
+  inputs:
+    command: 'build'
+
+- task: DotNetCoreCLI@2
+  displayName: Test libraries
+  inputs:
+    command: 'test'
+
+- task: DotNetCoreCLI@2
+  displayName: Pack libraries
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'GitVersion.NugetVersion'
+
+- task: DotNetCoreCLI@2
+  displayName: Push libraries
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'cd43281b-c764-45ca-a804-974d979b8d0b/b4b93fc7-3bd6-45a6-a7bb-2c07e846463e'

@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Core", "src\GalaxyHotel.Core\GalaxyHotel.Core.csproj", "{B359C0F4-02C6-4776-AA6F-8855B23EA978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{048E1DA2-519E-4B47-864A-9F9A96C54C07}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Dto", "src\GalaxyHotel.Dto\GalaxyHotel.Dto.csproj", "{85AE3219-9A17-4C8B-922D-076177312114}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Infrastructure", "src\GalaxyHotel.Infrastructure\GalaxyHotel.Infrastructure.csproj", "{F1A30111-6929-4F0B-ADCD-5F01A2158A71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3A549608-93C5-45F3-BE4B-84105FCE9B9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Core.Services.Tests", "tests\GalaxyHotel.Core.Services.Tests\GalaxyHotel.Core.Services.Tests.csproj", "{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GalaxyHotel.Infrastructure.IntegrationTests", "tests\GalaxyHotel.Infrastructure.IntegrationTests\GalaxyHotel.Infrastructure.IntegrationTests.csproj", "{CA831A3B-17EA-4678-B41C-A9D973FE6CE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B359C0F4-02C6-4776-AA6F-8855B23EA978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B359C0F4-02C6-4776-AA6F-8855B23EA978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B359C0F4-02C6-4776-AA6F-8855B23EA978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B359C0F4-02C6-4776-AA6F-8855B23EA978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85AE3219-9A17-4C8B-922D-076177312114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85AE3219-9A17-4C8B-922D-076177312114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85AE3219-9A17-4C8B-922D-076177312114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85AE3219-9A17-4C8B-922D-076177312114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A30111-6929-4F0B-ADCD-5F01A2158A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A30111-6929-4F0B-ADCD-5F01A2158A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A30111-6929-4F0B-ADCD-5F01A2158A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A30111-6929-4F0B-ADCD-5F01A2158A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA831A3B-17EA-4678-B41C-A9D973FE6CE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA831A3B-17EA-4678-B41C-A9D973FE6CE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA831A3B-17EA-4678-B41C-A9D973FE6CE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA831A3B-17EA-4678-B41C-A9D973FE6CE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B359C0F4-02C6-4776-AA6F-8855B23EA978} = {048E1DA2-519E-4B47-864A-9F9A96C54C07}
+		{85AE3219-9A17-4C8B-922D-076177312114} = {048E1DA2-519E-4B47-864A-9F9A96C54C07}
+		{F1A30111-6929-4F0B-ADCD-5F01A2158A71} = {048E1DA2-519E-4B47-864A-9F9A96C54C07}
+		{1C1CB7D0-49AD-401F-BCFD-962F07ED9F81} = {3A549608-93C5-45F3-BE4B-84105FCE9B9E}
+		{CA831A3B-17EA-4678-B41C-A9D973FE6CE5} = {3A549608-93C5-45F3-BE4B-84105FCE9B9E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63F36747-965C-4623-AEEF-E4F2C635819F}
+	EndGlobalSection
+EndGlobal
